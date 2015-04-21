@@ -10,6 +10,12 @@ filetype plugin indent on
 "" Paste toggle (autoident screw paste)
 set pastetoggle=<F2>
 
+"" Move between windows with alt+arrow
+nmap <S-Up> :wincmd k<CR>
+nmap <S-Down> :wincmd j<CR>
+nmap <S-Left> :wincmd h<CR>
+nmap <S-Right> :wincmd l<CR>
+
 "" Fix make file stupid tabs
 autocmd FileType make setlocal noexpandtab
 
@@ -19,6 +25,20 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 "" NERDTree
 autocmd vimenter * NERDTree     " auto open
 let NERDTreeIgnore = ['\.pyc$']
+
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+  if exists("t:NERDTreeBufName")
+    if bufwinnr(t:NERDTreeBufName) != -1
+      if winnr("$") == 1
+        q
+      endif
+    endif
+  endif
+endfunction
 
 
 "" Synaptics
@@ -36,8 +56,6 @@ let g:syntastic_ignore_files = ['\.py$'] " vim-flake8 for python
 
 "" Vim-airline visibile in single files
 set laststatus=2
-"" Vim-airline tab support
-"" let g:airline#extensions#tabline#enabled = 1
 
 
 set nocompatible                " choose no compatibility with legacy vi
@@ -45,6 +63,7 @@ set number                      " line number
 set encoding=utf-8
 set showcmd                     " display incomplete commands
 set colorcolumn=80              " display vertical line
+
 
 "" Searching
 set hlsearch                    " highlight matches
