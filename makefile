@@ -5,7 +5,8 @@ symlinks = vimrc \
 		   i3status.conf \
 		   Xdefaults \
 		   xinitrc \
-		   fonts.conf
+		   fonts.conf \
+		   gdbinit
 
 # makes sure make will always make file
 .PHONY: $(symlinks)
