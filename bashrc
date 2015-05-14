@@ -1,5 +1,9 @@
 [[ ! $- == *i* ]] && return
 
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 export EDITOR="vim";
 export HISTSIZE=32768;
 export HISTFILESIZE=$HISTSIZE;
