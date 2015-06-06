@@ -15,22 +15,22 @@ export LESS_TERMCAP_md="${yellow}";
 export MANPAGER="less -X";
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 
-# make those use sudo instead su
-alias ports='su -c "lsof -Pan -i tcp -i udp"'
+
+# FUNCTIONS
+
 openport() {
     PORT=$1
-    su root -c "echo Opening port: $PORT;\
-        iptables -A INPUT -p tcp --dport $PORT -j ACCEPT;\
-        iptables -nL | grep $PORT"
-}
-closeport() {
-    PORT=$1
-    su root -c "echo Closing port: $PORT;\
-        iptables -D INPUT -p tcp --dport $PORT -j ACCEPT;\
+    echo "[+] Opening port: $PORT";
+    sudo sh -c "iptables -A INPUT -p tcp --dport $PORT -j ACCEPT;\
         iptables -nL | grep $PORT"
 }
 
-# FZF magic
+closeport() {
+    PORT=$1
+    echo "[+] Closing port: $PORT";
+    sudo sh -c "iptables -D INPUT -p tcp --dport $PORT -j ACCEPT;\
+        iptables -nL | grep $PORT"
+}
 
 fmount() {
     local device
@@ -72,6 +72,9 @@ fo() {
         [ "$key" = ctrl-o ] && xdg-open "$file" || ${EDITOR:-vim} "$file"
     fi
 }
+
+alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
+alias fwrules='sudo sh -c "sudo iptables -nvL --line-numbers"'
 
 alias kauppalehti='python ~/scripts/kauppalehti.py'
 alias sale='python ~/scripts/sale.py'
