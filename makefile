@@ -11,7 +11,7 @@ symlinks = vimrc \
 # makes sure make will always make file
 .PHONY: $(symlinks) i3
 
-install: $(symlinks) font-awesome i3 set-user-directories
+install: $(symlinks) font-awesome i3 set-user-directories vim-plugin-manager
 
 $(symlinks):
 	test -e $(CURDIR)/$@ && ln $(LN_FLAGS) $(CURDIR)/$@ ~/.$@
@@ -29,6 +29,10 @@ font-awesome:
 	ln $(LN_FLAGS) $(CURDIR)/fontawesome-webfont.ttf \
 		~/.local/share/fonts/fontawesome-webfont.ttf && \
 	fc-cache -fv > /dev/null 2>&1
+
+vim-plugin-manager:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+		    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 check-dead:
 	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
