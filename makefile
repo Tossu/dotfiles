@@ -11,9 +11,7 @@ symlinks = vimrc \
 # makes sure make will always make file
 .PHONY: $(symlinks) i3
 
-all: install font-awesome i3 set-user-directories
-
-install: $(symlinks)
+install: $(symlinks) font-awesome i3 set-user-directories
 
 $(symlinks):
 	test -e $(CURDIR)/$@ && ln $(LN_FLAGS) $(CURDIR)/$@ ~/.$@
@@ -21,7 +19,7 @@ $(symlinks):
 # this needs xdg-user-dirs installed
 set-user-directories:
 	xdg-user-dirs-update --set DOWNLOAD ~/downloads && \
-	xdg-user-dirs-update --set HOME ~/
+	xdg-user-dirs-update --set DESKTOP ~/
 
 i3:
 	mkdir -p ~/.i3 && ln $(LN_FLAGS) $(CURDIR)/i3/config ~/.i3/config
