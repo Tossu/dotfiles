@@ -32,6 +32,18 @@ closeport() {
 
 # FZF magic
 
+fmount() {
+    local device
+    device=$(gvfs-mount -li | awk '/'unix-device:'/ {print $2}' | fzf) &&
+    gvfs-mount -d ${device//\'}
+}
+
+fumount() {
+    local path
+    path=$(gvfs-mount -li | awk '/'\-\>'/ {print $4}' | uniq | fzf) &&
+    gvfs-mount -u $path
+}
+
 ff() {
     ag --nobreak --nonumbers --noheading . | fzf
 }
@@ -72,6 +84,6 @@ alias wlansetup='nmtui'
 alias wlanhome='nmtui-connect Home'
 alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 
-PS1='[\W]\$ '
+PS1=' \W\[\e[0;31m\]]\[\e[0m\] '
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
