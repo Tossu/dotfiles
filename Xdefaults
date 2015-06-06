@@ -1,20 +1,21 @@
 !-------------------------------------------------------------------------------
 ! Xft settings
 !-------------------------------------------------------------------------------
- 
+
 Xft.dpi: 96
 Xft.antialias: false
 Xft.rgba: rgb
 Xft.hinting: true
 Xft.hintstyle: hintslight
- 
+
 !-------------------------------------------------------------------------------
 ! URxvt settings
 ! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
 ! More info at:
 ! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
 !-------------------------------------------------------------------------------
- 
+!
+
 URxvt.depth: 32
 URxvt.geometry: 90x30
 URxvt.transparent: false
@@ -25,31 +26,31 @@ URxvt.loginShell: true
 URxvt.saveLines: 50
 URxvt.internalBorder: 3
 URxvt.lineSpace: 0
- 
+
 ! Fonts
 URxvt.allow_bold: false
 #URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=20
 #URxvt.boldFont: xft:DejaVu Sans Mono:style=bold:antialias=true:pixelsize=20
 URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=13
 URxvt.boldFont: xft:DejaVu Sans Mono:style=bold:antialias=true:pixelsize=13
- 
+
 ! Fix font space
 URxvt*letterSpace: -1
- 
+
 ! Scrollbar
 URxvt.scrollStyle: rxvt
 URxvt.scrollBar: false
- 
+
 ! Perl extensions
 URxvt.perl-ext-common: default,matcher
 URxvt.matcher.button: 1
 URxvt.url-launcher: /usr/bin/firefox
- 
+
 ! Cursor
 URxvt.cursorBlink: true
 URxvt.cursorColor: #657b83
 URxvt.cursorUnderline: false
- 
+
 ! Pointer
 URxvt.pointerBlank: true
 
