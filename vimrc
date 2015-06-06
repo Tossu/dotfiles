@@ -1,29 +1,21 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
 
 call plug#end()
 
-"" PLUGINS
-
-if !has("gui_running")
-    let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
-endif
-
-set background=dark
-try
-    colorscheme solarized
-catch
-endtry
-
-
-"" GENERAL SETTINGS
+" ================
+" GENERAL SETTINGS
+" ================
 
 filetype on
 syntax on
 filetype plugin indent on
+
+let mapleader = ","
 
 set nocompatible                " choose no compatibility with legacy vi
 set number                      " line number
@@ -47,7 +39,6 @@ set shiftround                  " round indent to multiple of 'shiftwidth'
 set autoindent                  " align the new line indent with the previous line
 set backspace=indent,eol,start  " backspace through everything in insert mode
 
-
 "" displays vertical line
 if (exists('+colorcolumn'))
     set colorcolumn=80
@@ -66,3 +57,41 @@ autocmd FileType make setlocal noexpandtab
 
 "" Easier buffer menu
 nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" =======
+" PLUGINS
+" =======
+
+if !has("gui_running")
+    let g:solarized_termtrans=1
+    let g:solarized_termcolors=256
+endif
+
+set background=dark
+try
+    colorscheme solarized
+catch
+endtry
+
+"" let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
+" List of buffers
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader><Enter> :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
+\ })<CR>
+
