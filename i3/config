@@ -156,3 +156,8 @@ bar {
 }
 
 new_window 1pixel
+
+# Volume control binding
+bindsym XF86AudioRaiseVolume exec ponymix increase 5
+bindsym XF86AudioLowerVolume exec ponymix decrease 5
+bindsym XF86AudioMute exec ponymix toggle
