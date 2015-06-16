@@ -11,6 +11,12 @@ call plug#end()
 " GENERAL SETTINGS
 " ================
 
+imap jj <Esc>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 filetype on
 syntax on
 filetype plugin indent on
