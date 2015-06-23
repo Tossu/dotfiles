@@ -73,6 +73,14 @@ fo() {
     fi
 }
 
+sockproxy() {
+    if [ -z $1 ]; then
+        echo "Usage: sockproxy [username@host]"
+    else
+        ssh -D 8080 -N $1
+    fi;
+}
+
 alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
 alias fwrules='sudo sh -c "sudo iptables -nvL --line-numbers"'
 
