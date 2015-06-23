@@ -101,3 +101,12 @@ nnoremap <silent> <Leader><Enter> :call fzf#run({
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
+"" Open files in horizontal split
+nnoremap <silent> <Leader>hs :call fzf#run({
+\   'down': '40%',
+\   'sink': 'botright split' })<CR>
+
+"" Open files in vertical horizontal split
+nnoremap <silent> <Leader>vs :call fzf#run({
+\   'right': winwidth('.') / 2,
+\   'sink':  'vertical botright split' })<CR>
