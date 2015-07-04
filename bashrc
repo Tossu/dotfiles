@@ -74,9 +74,20 @@ md() {
     pandoc -s -f markdown -t man "$*" | man -l -
 }
 
+
+backup() {
+    echo "[+] Backing up /documents"
+    rsync -a --delete -e ssh /home/$USER/documents/ \
+        backup:/home/$USER/documents/;
+    echo "[+] Backing up /programming"
+    rsync -a --delete -e ssh /home/$USER/programming/ \
+        backup:/home/$USER/programming/;
+}
+
+
 sockproxy() {
     if [ -z $1 ]; then
-        echo "Usage: sockproxy [username@host]"
+        echo "Usage: sockproxy [username@remotehost]"
     else
         ssh -D 8080 -N $1
     fi;
