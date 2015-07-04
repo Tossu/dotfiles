@@ -61,9 +61,6 @@ set pastetoggle=<F2>
 "" fix makefile tab identation
 autocmd FileType make setlocal noexpandtab
 
-"" Easier buffer menu
-nnoremap <F5> :buffers<CR>:buffer<Space>
-
 " =======
 " PLUGINS
 " =======
@@ -94,19 +91,11 @@ function! s:bufopen(e)
   execute 'buffer' matchstr(a:e, '^[ 0-9]*')
 endfunction
 
-nnoremap <silent> <Leader><Enter> :call fzf#run({
+nnoremap <silent> <Leader>b :call fzf#run({
 \   'source':  reverse(<sid>buflist()),
 \   'sink':    function('<sid>bufopen'),
 \   'options': '+m',
 \   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
-"" Open files in horizontal split
-nnoremap <silent> <Leader>hs :call fzf#run({
-\   'down': '40%',
-\   'sink': 'botright split' })<CR>
-
-"" Open files in vertical horizontal split
-nnoremap <silent> <Leader>vs :call fzf#run({
-\   'right': winwidth('.') / 2,
-\   'sink':  'vertical botright split' })<CR>
+nnoremap <silent> <Leader>e :FZF<CR>
