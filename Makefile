@@ -1,19 +1,23 @@
 CURDIR ?= $(.CURDIR)
 LN_FLAGS = -sfn
-symlinks = vimrc \
+files = vimrc \
 		   bashrc \
 		   i3status.conf \
 		   Xdefaults \
 		   xinitrc \
 		   fonts.conf \
 		   gdbinit
+scripts = font-awesome \
+		  i3 \
+		  set-user-directories \
+		  vim-plugin-manager
 
 # makes sure make will always make file
-.PHONY: $(symlinks) i3
+.PHONY: $(files) $(scripts)
 
-install: $(symlinks) font-awesome i3 set-user-directories vim-plugin-manager
+install: $(files) $(scripts)
 
-$(symlinks):
+$(files):
 	test -e $(CURDIR)/$@ && ln $(LN_FLAGS) $(CURDIR)/$@ ~/.$@
 
 # this needs xdg-user-dirs installed
@@ -26,7 +30,7 @@ i3:
 
 font-awesome:
 	mkdir -p ~/.local/share/fonts && \
-	ln $(LN_FLAGS) $(CURDIR)/fontawesome-webfont.ttf \
+	ln $(LN_FLAGS) $(CURDIR)/fonts/fontawesome-webfont.ttf \
 		~/.local/share/fonts/fontawesome-webfont.ttf && \
 	fc-cache -fv > /dev/null 2>&1
 
