@@ -48,13 +48,6 @@ ff() {
     ag --nobreak --nonumbers --noheading . | fzf
 }
 
-fd() {
-    local dir
-    dir=$(find ${1:-*} -path '*/\.*' -prune \
-        -o -type d -print 2> /dev/null | fzf +m) &&
-    cd "$dir"
-}
-
 fkill() {
     pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
@@ -73,6 +66,14 @@ fo() {
     fi
 }
 
+pyg() {
+    pygmentize -f terminal256 -O style=monokai -g
+}
+
+md() {
+    pandoc -s -f markdown -t man "$*" | man -l -
+}
+
 sockproxy() {
     if [ -z $1 ]; then
         echo "Usage: sockproxy [username@host]"
@@ -84,13 +85,13 @@ sockproxy() {
 alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
 alias fwrules='sudo sh -c "sudo iptables -nvL --line-numbers"'
 
-alias kauppalehti='python ~/scripts/kauppalehti.py'
-alias sale='python ~/scripts/sale.py'
-alias cal='python ~/scripts/cal.py'
+alias kauppalehti='python -B ~/.dotfiles/scripts/kauppalehti.py'
+alias sale='python -B ~/.dotfiles/scripts/sale.py'
+alias cal='python -B ~/.dotfiles/scripts/cal.py'
 
 alias ls='ls --color=auto'
 alias digga='dig any +nocmd +noall +answer +multiline'
-alias pjson='python -mjson.tool | less -X'
+alias pjson='python -mjson.tool | less -X | pygmentize -l javascript'
 alias wlansetup='nmtui'
 alias wlanhome='nmtui-connect Home'
 alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
