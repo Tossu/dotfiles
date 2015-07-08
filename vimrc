@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
 
 call plug#end()
 
@@ -61,6 +60,25 @@ set pastetoggle=<F2>
 "" fix makefile tab identation
 autocmd FileType make setlocal noexpandtab
 
+"" statusline
+
+set laststatus=2
+
+set statusline=%f                               " file name
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, " file encoding
+set statusline+=%{&ff}]                         " file format
+set statusline+=%y                              " filetype
+set statusline+=%h                              " help file flag
+set statusline+=%m                              " modified flag
+set statusline+=%r                              " read only flag
+
+set statusline+=\ %=                        " align left
+set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
+set statusline+=\ Col:%c                    " current column
+set statusline+=\ Buf:%n                    " Buffer number
+set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
+
+
 " =======
 " PLUGINS
 " =======
@@ -75,9 +93,6 @@ try
     colorscheme solarized
 catch
 endtry
-
-"" let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
 
 " List of buffers
 function! s:buflist()
