@@ -14,23 +14,7 @@ export LC_ALL="en_US.UTF-8";
 export LESS_TERMCAP_md="${yellow}";
 export MANPAGER="less -X";
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
-
-
-# FUNCTIONS
-
-openport() {
-    PORT=$1
-    echo "[+] Opening port: $PORT";
-    sudo sh -c "iptables -A INPUT -p tcp --dport $PORT -j ACCEPT;\
-        iptables -nL | grep $PORT"
-}
-
-closeport() {
-    PORT=$1
-    echo "[+] Closing port: $PORT";
-    sudo sh -c "iptables -D INPUT -p tcp --dport $PORT -j ACCEPT;\
-        iptables -nL | grep $PORT"
-}
+export PATH=$HOME/.cabal/bin:$PATH
 
 fmount() {
     local device
@@ -56,34 +40,18 @@ fkill() {
     fi
 }
 
-fo() {
-    local out file key
-    out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
-    key=$(head -1 <<< "$out")
-    file=$(head -2 <<< "$out" | tail -1)
-    if [ -n "$file" ]; then
-        [ "$key" = ctrl-o ] && xdg-open "$file" || ${EDITOR:-vim} "$file"
-    fi
-}
-
 pyg() {
     pygmentize -f terminal256 -O style=monokai -g
 }
 
-md() {
-    pandoc -s -f markdown -t man "$*" | man -l -
-}
-
-
 backup() {
-    echo "[+] Backing up /documents"
+    echo "[*] Backing up /documents"
     rsync -a --delete -e ssh /home/$USER/documents/ \
         backup:/home/$USER/documents/;
-    echo "[+] Backing up /programming"
+    echo "[*] Backing up /programming"
     rsync -a --delete -e ssh /home/$USER/programming/ \
         backup:/home/$USER/programming/;
 }
-
 
 sockproxy() {
     if [ -z $1 ]; then
