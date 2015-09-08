@@ -50,7 +50,7 @@ if (exists('+colorcolumn'))
     highlight ColorColumn ctermbg=9
 endif
 
-"" invisible characters
+"" invisible characters (ttf-droid)
 set list
 set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
 
