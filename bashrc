@@ -75,6 +75,8 @@ alias wlansetup='nmtui'
 alias wlanhome='nmtui-connect Home'
 alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 
+# alias jyuprinter='ssh username@charra.it.jyu.fi lp -d jysecure-bw <'
+
 PS1=' \W\[\e[0;31m\]]\[\e[0m\] '
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
