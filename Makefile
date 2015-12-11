@@ -29,9 +29,9 @@ i3:
 	mkdir -p ~/.i3 && ln $(LN_FLAGS) $(CURDIR)/i3/config ~/.i3/config
 
 font-awesome:
-	mkdir -p ~/.local/share/fonts && \
+	mkdir ~/.fonts && \
 	ln $(LN_FLAGS) $(CURDIR)/fonts/fontawesome-webfont.ttf \
-		~/.local/share/fonts/fontawesome-webfont.ttf && \
+		~/.fonts/fontawesome-webfont.ttf && \
 	fc-cache -fv > /dev/null 2>&1
 
 vim-plugin-manager:
