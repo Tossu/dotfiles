@@ -8,5 +8,6 @@ fi
 setxkbmap -option "nbsp:none" -layout fi
 feh --bg-scale ~/.dotfiles/wallpapers/current.jpg
 xautolock -time 15 -locker slock &
-start-pulseaudio-x11 &
+redshift -l 62.24:25.74 &
+pulseaudio &
 exec i3
