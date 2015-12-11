@@ -5,6 +5,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 export EDITOR="vim";
+export VISUAL="vim";
 export HISTSIZE=32768;
 export HISTFILESIZE=$HISTSIZE;
 export HISTCONTROL=ignoredups;
@@ -16,34 +17,11 @@ export MANPAGER="less -X";
 export FZF_DEFAULT_COMMAND='ag -l -g ""'
 export PATH=$HOME/.cabal/bin:$PATH
 
-fmount() {
-    local device
-    device=$(gvfs-mount -li | awk '/'unix-device:'/ {print $2}' | fzf) &&
-    gvfs-mount -d ${device//\'}
-}
-
-fumount() {
-    local path
-    path=$(gvfs-mount -li | awk '/'\-\>'/ {print $4}' | uniq | fzf) &&
-    gvfs-mount -u $path
-}
-
-ff() {
-    ag --nobreak --nonumbers --noheading . | fzf
-}
-
-fkill() {
-    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-    if [ "x$pid" != "x" ]; then
-        kill -${1:-9} $pid
-    fi
-}
-
 pyg() {
     pygmentize -f terminal256 -O style=monokai -g
 }
 
+# TODO: one directory
 backup() {
     echo "[*] Backing up /documents"
     rsync -a --delete -e ssh /home/$USER/documents/ \
@@ -61,21 +39,23 @@ sockproxy() {
     fi;
 }
 
+alias ls='ls --color=auto'
+alias g='git'
+
 alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
 alias fwrules='sudo sh -c "sudo iptables -nvL --line-numbers"'
-
-alias kauppalehti='python -B ~/.dotfiles/scripts/kauppalehti.py'
-alias sale='python -B ~/.dotfiles/scripts/sale.py'
-alias cal='python -B ~/.dotfiles/scripts/cal.py'
-
-alias ls='ls --color=auto'
 alias digga='dig any +nocmd +noall +answer +multiline'
 alias pjson='python -mjson.tool | less -X | pygmentize -l javascript'
 alias wlansetup='nmtui'
-alias wlanhome='nmtui-connect Home'
-alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 
+# xrandr --output VGA1 --mode 1024x768 --right-of LVDS1
+# xrandr --putput VGA1 --off
+
+# alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 # alias jyuprinter='ssh username@charra.it.jyu.fi lp -d jysecure-bw <'
+
+alias lsorhpans='sudo pacman -Qdt'
+alias rmorphans='sudo pacman -Rs $(pacman -Qtdq)'
 
 PS1=' \W\[\e[0;31m\]]\[\e[0m\] '
 
