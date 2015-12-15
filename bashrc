@@ -40,6 +40,9 @@ sockproxy() {
 }
 
 alias ls='ls --color=auto'
+alias tree='tree -C'
+alias less='less -R'
+alias grep='grep --color=auto'
 alias g='git'
 
 alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
@@ -60,3 +63,4 @@ alias rmorphans='sudo pacman -Rs $(pacman -Qtdq)'
 PS1=' \W\[\e[0;31m\]]\[\e[0m\] '
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.dircolors ] && eval `dircolors ~/.dircolors`
