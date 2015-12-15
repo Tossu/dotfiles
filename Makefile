@@ -2,11 +2,13 @@ CURDIR ?= $(.CURDIR)
 LN_FLAGS = -sfn
 files = vimrc \
 		   bashrc \
+		   bash_profile \
 		   i3status.conf \
 		   Xdefaults \
 		   xinitrc \
 		   fonts.conf \
-		   gdbinit
+		   gdbinit \
+		   dircolors
 scripts = font-awesome \
 		  i3 \
 		  set-user-directories \
@@ -29,7 +31,7 @@ i3:
 	mkdir -p ~/.i3 && ln $(LN_FLAGS) $(CURDIR)/i3/config ~/.i3/config
 
 font-awesome:
-	mkdir ~/.fonts && \
+	mkdir -p ~/.fonts && \
 	ln $(LN_FLAGS) $(CURDIR)/fonts/fontawesome-webfont.ttf \
 		~/.fonts/fontawesome-webfont.ttf && \
 	fc-cache -fv > /dev/null 2>&1
