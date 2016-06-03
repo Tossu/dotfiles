@@ -1,8 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'nvie/vim-flake8', { 'for': 'python' }
+Plug 'nvie/vim-flake8'
 Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdtree'
+Plug 'kchmck/vim-coffee-script'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'rking/ag.vim'
 
 call plug#end()
 
@@ -83,34 +87,20 @@ set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
 " PLUGINS
 " =======
 
-if !has("gui_running")
-    let g:solarized_termtrans=1
-    let g:solarized_termcolors=256
-endif
+""" if !has("gui_running")
+"    let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+" endif
 
-set background=dark
+set background=light
 try
     colorscheme solarized
 catch
 endtry
 
-" List of buffers
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> <Leader>b :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2
-\ })<CR>
-
 nnoremap <silent> <Leader>e :FZF<CR>
+
+"" NERDTree toggle
+silent! nmap <F3> :NERDTreeToggle<CR>
+let NERDTreeWinSize = 55
+let NERDTreeIgnore = ['\.pyc$']
