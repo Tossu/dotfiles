@@ -1,6 +1,7 @@
 CURDIR ?= $(.CURDIR)
 LN_FLAGS = -sfn
 files = vimrc \
+		   zshrc \
 		   bashrc \
 		   bash_profile \
 		   i3status.conf \
