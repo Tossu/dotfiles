@@ -43,7 +43,14 @@ alias ls='ls --color=auto'
 alias tree='tree -C'
 alias less='less -R'
 alias grep='grep --color=auto'
+
 alias g='git'
+alias gb='git branch'
+alias gs='git status'
+alias gd='git diff'
+alias gc='git checkout'
+
+alias r='rails'
 
 alias lports='sudo sh -c "lsof -Pan -i tcp -i udp"'
 alias fwrules='sudo sh -c "sudo iptables -nvL --line-numbers"'
@@ -54,7 +61,7 @@ alias wlansetup='nmtui'
 # xrandr --output VGA1 --mode 1024x768 --right-of LVDS1
 # xrandr --putput VGA1 --off
 
-# alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
+alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 # alias jyuprinter='ssh username@charra.it.jyu.fi lp -d jysecure-bw <'
 
 alias lsorhpans='sudo pacman -Qdt'
@@ -62,5 +69,8 @@ alias rmorphans='sudo pacman -Rs $(pacman -Qtdq)'
 
 PS1=' \W\[\e[0;31m\]]\[\e[0m\] '
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.dircolors ] && eval `dircolors ~/.dircolors`
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
