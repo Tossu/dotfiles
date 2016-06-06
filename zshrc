@@ -67,6 +67,6 @@ if ! zplug check; then
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load
 
 export DJANGO_SETTINGS_MODULE=settings.development
