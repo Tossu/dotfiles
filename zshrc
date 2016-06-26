@@ -1,16 +1,8 @@
 autoload -U colors && colors
 
-# Alias
-alias ls='ls --color=auto'
-alias tree='tree -C'
-alias -g L='less -R'
-alias c="cat"
-alias work_monitor_off='xrandr --output HDMI1 --off'
-
-# Prompts
 PROMPT=" %1~%{$fg[red]%}] %{$reset_color%}"
 
-# Git prompt
+# GIT status
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
@@ -18,11 +10,11 @@ setopt prompt_subst
 zstyle ':vcs_info:*' formats '%b'
 RPROMPT=\$vcs_info_msg_0_
 
-# Alias
 alias ls='ls --color=auto'
 alias tree='tree -C'
 alias less='less -R'
 alias grep='grep --color=auto'
+alias c='cat'
 
 alias g='git'
 alias gb='git branch'
@@ -33,9 +25,9 @@ alias gc='git checkout'
 alias r='rails'
 alias vim='nvim'
 
-# alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
+alias work_monitor_off='xrandr --output HDMI1 --off'
 
-# Use modern completion system
+# Use completion system
 autoload -Uz compinit && compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
