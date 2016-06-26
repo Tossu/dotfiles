@@ -13,7 +13,6 @@ files = vimrc \
 scripts = font-awesome \
 		  i3 \
 		  set-user-directories \
-		  vim-plugin-manager \
 		  nvim
 
 # makes sure make will always make file
@@ -41,16 +40,3 @@ font-awesome:
 	ln $(LN_FLAGS) $(CURDIR)/fonts/fontawesome-webfont.ttf \
 		~/.fonts/fontawesome-webfont.ttf && \
 	fc-cache -fv > /dev/null 2>&1
-
-vim-plugin-manager:
-	curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-		    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-check-dead:
-	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -print
-
-clean-dead:
-	find ~ -maxdepth 1 -name '.*' -type l -exec test ! -e {} \; -delete
-
-update:
-	git pull --rebase
