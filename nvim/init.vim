@@ -76,5 +76,9 @@ silent! nmap <F3> :NERDTreeToggle<CR>
 let NERDTreeWinSize = 55
 let NERDTreeIgnore = ['\.pyc$']
 
+"" close nerdtree if last window closed
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
+    \ && b:NERDTree.isTabTree()) | q | endif
+
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd InsertChange * update | Neomake
