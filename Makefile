@@ -13,7 +13,8 @@ files = vimrc \
 scripts = font-awesome \
 		  i3 \
 		  set-user-directories \
-		  vim-plugin-manager
+		  vim-plugin-manager \
+		  nvim
 
 # makes sure make will always make file
 .PHONY: $(files) $(scripts)
@@ -22,6 +23,10 @@ install: $(files) $(scripts)
 
 $(files):
 	test -e $(CURDIR)/$@ && ln $(LN_FLAGS) $(CURDIR)/$@ ~/.$@
+
+nvim:
+	ln $(LN_FLAGS) $(CURDIR)/nvim/ \
+		~/.config/
 
 # this needs xdg-user-dirs installed
 set-user-directories:

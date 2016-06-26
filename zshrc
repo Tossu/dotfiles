@@ -31,6 +31,7 @@ alias gd='git diff'
 alias gc='git checkout'
 
 alias r='rails'
+alias vim='nvim'
 
 # alias maildebugserver='python -m smtpd -n -c DebuggingServer localhost:1025'
 

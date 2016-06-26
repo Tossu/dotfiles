@@ -1,28 +1,25 @@
 call plug#begin('~/.vim/plugged')
 
-Plug 'nvie/vim-flake8'
 Plug 'altercation/vim-colors-solarized'
+Plug 'neomake/neomake'
+Plug 'tpope/vim-surround'
+
 Plug 'scrooloose/nerdtree'
-Plug 'kchmck/vim-coffee-script'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'rking/ag.vim'
 
-call plug#end()
+Plug 'nvie/vim-flake8'
+Plug 'davidhalter/jedi-vim'
 
-" ================
-" GENERAL SETTINGS
-" ================
+Plug 'benjie/neomake-local-eslint.vim'
+
+call plug#end()
 
 imap jj <Esc>
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
-filetype on
-syntax on
-filetype plugin indent on
 
 let mapleader = ","
 
@@ -61,46 +58,23 @@ set listchars=tab:▸\ ,eol:¬,trail:·,nbsp:·
 "" paste toggle (autoident screw paste)
 set pastetoggle=<F2>
 
+"" fix identations
+map <F7> mzgg=G`z
+
+"" change double quote strings to single quote
+map <F8> :%s/"\(.\{-}\)"/'\1'/g
+
+nnoremap <leader>; $A;
+
 "" fix makefile tab identation
 autocmd FileType make setlocal noexpandtab
 
-"" statusline
-
-set laststatus=2
-
-set statusline=%f                               " file name
-set statusline+=[%{strlen(&fenc)?&fenc:'none'}, " file encoding
-set statusline+=%{&ff}]                         " file format
-set statusline+=%y                              " filetype
-set statusline+=%h                              " help file flag
-set statusline+=%m                              " modified flag
-set statusline+=%r                              " read only flag
-
-set statusline+=\ %=                        " align left
-set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
-set statusline+=\ Col:%c                    " current column
-set statusline+=\ Buf:%n                    " Buffer number
-set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
-
-
-" =======
-" PLUGINS
-" =======
-
-""" if !has("gui_running")
-"    let g:solarized_termtrans=1
 let g:solarized_termcolors=256
-" endif
+colorscheme solarized
 
-set background=light
-try
-    colorscheme solarized
-catch
-endtry
-
-nnoremap <silent> <Leader>e :FZF<CR>
-
-"" NERDTree toggle
 silent! nmap <F3> :NERDTreeToggle<CR>
 let NERDTreeWinSize = 55
 let NERDTreeIgnore = ['\.pyc$']
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+autocmd InsertChange * update | Neomake
