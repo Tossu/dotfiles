@@ -9,7 +9,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 
 Plug 'nvie/vim-flake8'
-Plug 'davidhalter/jedi-vim'
 
 Plug 'benjie/neomake-local-eslint.vim'
 
@@ -82,3 +81,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 autocmd InsertChange * update | Neomake
+
+"" this needs xclip
+vnoremap  <leader>y  "+y
