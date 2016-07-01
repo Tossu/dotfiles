@@ -1,7 +1,6 @@
 CURDIR ?= $(.CURDIR)
 LN_FLAGS = -sfn
-files = vimrc \
-		   zshrc \
+files = zshrc \
 		   bashrc \
 		   bash_profile \
 		   i3status.conf \
@@ -13,6 +12,7 @@ files = vimrc \
 scripts = font-awesome \
 		  i3 \
 		  set-user-directories \
+		  install-zplug \
 		  nvim
 
 # makes sure make will always make file
@@ -26,6 +26,9 @@ $(files):
 nvim:
 	ln $(LN_FLAGS) $(CURDIR)/nvim/ \
 		~/.config/
+
+install-zplug:
+	git clone https://github.com/zplug/zplug ~/.zplug
 
 # this needs xdg-user-dirs installed
 set-user-directories:
