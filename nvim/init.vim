@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'altercation/vim-colors-solarized'
 Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
+Plug 'Yggdroot/indentLine'
 
 Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -11,6 +12,8 @@ Plug 'rking/ag.vim'
 Plug 'nvie/vim-flake8'
 
 Plug 'benjie/neomake-local-eslint.vim'
+
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 
@@ -71,7 +74,8 @@ autocmd FileType make setlocal noexpandtab
 let g:solarized_termcolors=256
 colorscheme solarized
 
-silent! nmap <F3> :NERDTreeToggle<CR>
+silent! nmap <F3> :NERDTree<CR>
+silent! nmap <F4> :NERDTreeToggle<CR>
 let NERDTreeWinSize = 55
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -84,3 +88,7 @@ autocmd InsertChange * update | Neomake
 
 "" this needs xclip
 vnoremap  <leader>y  "+y
+
+let g:indentLine_char = '┆'
+
+ map <F5> :Neomake<CR>
