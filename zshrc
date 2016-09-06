@@ -72,6 +72,8 @@ export DJANGO_SETTINGS_MODULE=settings.development
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source "$HOME/.rvm/scripts/rvm"
 
+export PATH="$PATH:$HOME/bin"
+
 export PYTHONSTARTUP=~/.startup.py
 
 monni() {
