@@ -160,3 +160,6 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 # Print button
 bindsym Print exec scrot -me 'mv $f ~/screenshots/'
+
+# Android Emulator float
+for_window [title="^Android Emulator.+$"] floating enable
