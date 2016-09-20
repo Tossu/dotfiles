@@ -93,7 +93,4 @@ function monni() {
 
 export PYTHONSTARTUP=~/.startup.py
 export ANDROID_HOME=~/android-sdk
-export PATH="$HOME/bin:$PATH"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source "$HOME/.rvm/scripts/rvm"
+export PATH="$HOME/bin:$HOME/android-sdk/platform-tools:$PATH"
