@@ -23,9 +23,14 @@ alias gd='git diff'
 alias gc='git checkout'
 
 alias r='rails'
+alias p='python'
+alias pm='python manage.py'
 alias vim='nvim'
+alias v='nvim'
 
 alias work_monitor_off='xrandr --output HDMI1 --off'
+
+alias remove_branches='git branch --merged develop --no-color | grep -v master | grep -v develop | xargs git branch -d'
 
 # Use completion system
 autoload -Uz compinit && compinit
@@ -64,8 +69,6 @@ zplug load
 
 export DJANGO_SETTINGS_MODULE=settings.development
 
-export PATH="$HOME/bin:$PATH"
-
 function magnet_to_torrent() {
     [[ "$1" =~ xt=urn:btih:([^\&/]+) ]] || return 1
 
@@ -80,4 +83,17 @@ function magnet_to_torrent() {
     echo "d10:magnet-uri${#1}:${1}e" > "$filename.torrent"
 }
 
+function monni() {
+    if [ $(xrandr | grep "HDMI1 connected" -c) -gt 0 ]; then
+        xrandr --output HDMI1 --auto --right-of eDP1 &
+    else
+        xrandr --output HDMI1 --off
+    fi
+}
+
+export PYTHONSTARTUP=~/.startup.py
 export ANDROID_HOME=~/android-sdk
+export PATH="$HOME/bin:$PATH"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source "$HOME/.rvm/scripts/rvm"
