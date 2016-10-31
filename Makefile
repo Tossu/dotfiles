@@ -2,7 +2,6 @@ CURDIR ?= $(.CURDIR)
 LN_FLAGS = -sfn
 files = zshrc \
 		   bashrc \
-		   bash_profile \
 		   i3status.conf \
 		   Xdefaults \
 		   xinitrc \
@@ -12,8 +11,8 @@ files = zshrc \
 scripts = font-awesome \
 		  i3 \
 		  set-user-directories \
-		  install-zplug \
-		  nvim
+		  nvim \
+		  install-zplug
 
 # makes sure make will always make file
 .PHONY: $(files) $(scripts)
