@@ -68,6 +68,7 @@ fi
 zplug load
 
 export DJANGO_SETTINGS_MODULE=settings.development
+export VISUAL=nvim
 
 function magnet_to_torrent() {
     [[ "$1" =~ xt=urn:btih:([^\&/]+) ]] || return 1
