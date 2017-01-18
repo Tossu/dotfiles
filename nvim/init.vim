@@ -78,6 +78,8 @@ silent! nmap <F3> :NERDTree<CR>
 silent! nmap <F4> :NERDTreeToggle<CR>
 let NERDTreeWinSize = 55
 let NERDTreeIgnore = ['\.pyc$']
+let g:NERDTreeDirArrowExpandable="+"
+let g:NERDTreeDirArrowCollapsible="~"
 
 "" close nerdtree if last window closed
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree")
