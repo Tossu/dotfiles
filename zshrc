@@ -1,14 +1,38 @@
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export VISUAL=nvim
+
+export PATH="$HOME/bin:$HOME/android-sdk/platform-tools:$PATH"
+export KEYTIMEOUT=1
+
+export DJANGO_SETTINGS_MODULE=settings.development
+export PYTHONSTARTUP=~/.startup.py
+export ANDROID_HOME=~/android-sdk
+
 autoload -U colors && colors
 
 PROMPT=" %1~%{$fg[red]%}] %{$reset_color%}"
+RPROMPT=""
 
-# GIT status
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-zstyle ':vcs_info:*' formats '%b'
-RPROMPT=\$vcs_info_msg_0_
+function git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+function zle-line-init zle-keymap-select {
+    RPS1="$(git_current_branch) ${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 alias ls='ls --color=auto'
 alias tree='tree -C'
@@ -24,7 +48,6 @@ alias gc='git checkout'
 
 alias r='rails'
 alias p='python'
-alias pm='python manage.py'
 alias vim='nvim'
 alias v='nvim'
 
@@ -67,9 +90,6 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load
 
-export DJANGO_SETTINGS_MODULE=settings.development
-export VISUAL=nvim
-
 function magnet_to_torrent() {
     [[ "$1" =~ xt=urn:btih:([^\&/]+) ]] || return 1
 
@@ -92,6 +112,18 @@ function monni() {
     fi
 }
 
-export PYTHONSTARTUP=~/.startup.py
-export ANDROID_HOME=~/android-sdk
-export PATH="$HOME/bin:$HOME/android-sdk/platform-tools:$PATH"
+# vim mode
+bindkey -v
+# backspace works after leaving insert
+bindkey "^?" backward-delete-char
+# ctrl+U will clean line
+bindkey "^U" backward-kill-line
+
+# ZSH History
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
