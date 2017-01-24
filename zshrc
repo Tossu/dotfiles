@@ -51,6 +51,8 @@ alias p='python'
 alias vim='nvim'
 alias v='nvim'
 
+alias cal='cal -m'
+
 alias work_monitor_off='xrandr --output HDMI1 --off'
 
 alias remove_branches='git branch --merged develop --no-color | grep -v master | grep -v develop | xargs git branch -d'
