@@ -15,6 +15,9 @@ Plug 'benjie/neomake-local-eslint.vim'
 
 Plug 'kchmck/vim-coffee-script'
 
+Plug 'pangloss/vim-javascript'
+Plug 'flowtype/vim-flow'
+
 call plug#end()
 
 imap jj <Esc>
@@ -93,4 +96,6 @@ vnoremap  <leader>y  "+y
 
 let g:indentLine_char = '┆'
 
- map <F5> :Neomake<CR>
+map <F5> :Neomake<CR>
+
+set dir=/tmp
